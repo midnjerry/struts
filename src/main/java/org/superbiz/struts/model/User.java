@@ -15,26 +15,39 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.superbiz.struts;
+package org.superbiz.struts.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
-import javax.transaction.Transactional;
+@Entity
+@Table(name = "USER")
+public class User implements Serializable {
 
-@Component
-public class AddUser {
-
-    private final UserService service;
-
-    public AddUser(UserService service) {
-        this.service = service;
-    }
-
-
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
-    private String errorMessage;
+
+    public User(long id, String firstName, String lastName) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User() {
+    }
+
+    @Id
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -52,33 +65,4 @@ public class AddUser {
         this.lastName = lastName;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    @Transactional
-    public String execute() {
-
-        try {
-            service.add(new User(id, firstName, lastName));
-        } catch (Exception e) {
-            this.errorMessage = e.getMessage();
-            return "failure";
-        }
-
-        return "success";
-    }
 }

@@ -24,8 +24,7 @@ public class Application {
     @Bean
     public FilterRegistrationBean filterDispatch() {
         return buildFilterRegistration(2, new StrutsPrepareAndExecuteFilter(),
-            asList("/", "/addUserForm.action", "/addUser.action",
-                "/findUserForm.action", "/findUser.action",
+            asList("/findUserForm.action", "/findUser.action",
                 "/listAllUsers.action"));
     }
 
