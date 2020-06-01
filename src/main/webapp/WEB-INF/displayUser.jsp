@@ -1,5 +1,5 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="user" type="org.superbiz.struts.User" scope="request"/>
+<jsp:useBean id="user" type="org.superbiz.struts.model.User" scope="request"/>
 
 <t:layout title="User Details">
     <h2>User Details</h2>
